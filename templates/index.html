@@ -3,13 +3,15 @@
 <!--embed header template here-->
 {{ template "header.html" }}
 
-<!--loop over payload variable, which is user ip via GET request header-->
-{{ range .payload }}
-    <!--display title, which is "current client-->
-   <p><h2>{{ .Title }}</h2></p>
-    <!--displays content, which is clients ip-->
-   <p><h2>{{ .Content }}</h2></p>
-{{end}}
+<!--payload variable, which is client list-->
+{{ .payload }}
+    <!--display title-->
+   <p><h1>{{ .Title }}</h1></p>
+
+<!--payloads variable, which is clients ip-->
+{{ .payloads }}
+
+
 
 <!--embed footer template here-->
 {{ template "footer.html"}}
