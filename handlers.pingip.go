@@ -8,16 +8,9 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-type client struct {
-	Title   string "json:'title'"
-	Content string "json:'content'"
-}
-
-var clientList = []client{
-	client{Title: "Client's IP", Content: "content"},
-}
-
 func showIPIndexPage(c *gin.Context) {
+	//fetch function for list from models file
+	clientList := getClientList()
 	//HTML method to render template
 	c.HTML(
 		//set http status as 200
@@ -26,18 +19,9 @@ func showIPIndexPage(c *gin.Context) {
 		"index.html",
 		//passed data for pages use
 		gin.H{
-			"title":   "IPTest",
-			"payload": clientList,
+			"title":    "InitialIpTest",
+			"payload":  clientList,
+			"payloads": c.ClientIP(),
 		},
 	)
-}
-
-//try adding ClientIP func, calling the header info into it
-
-func getIP(r *http.Request) *client {
-	i := r.Header.Get("X-FORWARDED-FOR")
-
-	return &client{
-		Content: i,
-	}
 }
